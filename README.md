@@ -6,9 +6,9 @@
 
 ## 🚀 Live Demo
 
-Frontend: https://your-vercel-url.vercel.app
+Frontend: https://arv-skillcraft.vercel.app
 
-Backend API: https://your-render-url.onrender.com
+Backend API: https://arv-skillcraft-backend.onrender.com
 
 ---
 
