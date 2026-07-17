@@ -41,7 +41,7 @@ const resend = new Resend(process.env.RESEND_API_KEY);
 const mailSender = async (email, title, body) => {
   try {
     const response = await resend.emails.send({
-      from: "SkillCraft <onboarding@resend.dev>",
+      from: process.env.MAIL_USER,
       to: email,
       subject: title,
       html: body,
