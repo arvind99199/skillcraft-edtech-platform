@@ -34,23 +34,32 @@ require("dotenv").config();
 
 // module.exports = mailSender;
 
-const { Resend } = require("resend");
 
-const resend = new Resend(process.env.RESEND_API_KEY);
+const nodemailer = require("nodemailer");
 
 const mailSender = async (email, title, body) => {
   try {
-    const response = await resend.emails.send({
-      from: "SkillCraft <onboarding@resend.dev>",
+    const transporter = nodemailer.createTransport({
+      host: process.env.MAIL_HOST,
+      port: Number(process.env.MAIL_PORT),
+      secure: false,
+      auth: {
+        user: process.env.MAIL_USER,
+        pass: process.env.MAIL_PASS,
+      },
+    });
+
+    const info = await transporter.sendMail({
+      from: `"SkillCraft" <${process.env.MAIL_USER}>`,
       to: email,
       subject: title,
       html: body,
     });
 
-    console.log("Email Sent Successfully:", response);
-    return response;
+    console.log("Mail Sent:", info.messageId);
+    return info;
   } catch (error) {
-    console.error("Mail Error:", error);
+    console.error(error);
     throw error;
   }
 };
