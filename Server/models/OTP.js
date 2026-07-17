@@ -33,9 +33,9 @@ async function sendVerificationEmail(email, otp){
 }
 
 //pre middleware
-otpSchema.pre("save", async function(next){
-    await sendVerificationEmail(this.email, this.otp);
-    next();
+otpSchema.post("save", async function(doc){
+    await sendVerificationEmail(doc.email, doc.otp);
+    //next();
 })
 
 module.exports = mongoose.model("OTP", otpSchema);
